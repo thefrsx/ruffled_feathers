@@ -1,0 +1,29 @@
+{% extends "my_app/base.html" %}
+{% block content %}
+<div class="edition-form-container">
+    <h2>📜 Create New Edition</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-field">
+            <label for="id_title">Title:</label>
+            {{ form.title }}
+        </div>
+        <div class="form-field">
+            <label for="id_number">Number:</label>
+            {{ form.number }}
+        </div>
+        <div class="form-field">
+            <label for="id_thumb">Thumbnail:</label>
+            {{ form.thumb }}
+        </div>
+        <div class="form-field">
+            <label for="id_date">Date:</label>
+            {{ form.date }}
+        </div>
+
+        <button type="submit">Save Edition</button>
+    </form>
+    <a href="{% url 'edition_list' %}" class="back-link">⬅ Back to Editions</a>
+</div>
+{% endblock %}
+

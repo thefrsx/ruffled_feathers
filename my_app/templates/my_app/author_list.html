@@ -1,0 +1,46 @@
+{% extends "my_app/base.html" %}
+
+{% block title %}Know the Authors - Ruffles Feathers Newspaper{% endblock %}
+
+{% block content %}
+<div class="authors-container" style="padding: 20px; text-align: center;">
+    <h1 style="font-family: 'Garamond', serif; color: #3b2a1e;">
+         Know the Authors
+    </h1>
+
+    {% if is_author %}
+        <a href="{% url 'author_create' %}" class="button-medieval" style="margin: 20px auto; display: inline-block;">
+            ➕ Add Author
+        </a>
+    {% endif %}
+
+    {% if authors %}
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; margin-top: 20px;">
+            {% for author in authors %}
+                <div style="width: 220px; padding: 15px;
+                            border: 1px solid #5a4636; border-radius: 8px;
+                            background-color: rgba(245,240,230,0.9);
+                            text-align: center;">
+                    {% if author.profile_picture %}
+                        <img src="{{ author.profile_picture.url }}" alt="{{ author.name }}"
+                             style="width: 140px; height: 140px; object-fit: cover;
+                                    border-radius: 50%; margin-bottom: 15px;">
+                    {% endif %}
+                    <h3 style="margin: 0; font-family: 'Garamond', serif; color: #2e1b1b; font-size: 1.7em;">
+                        {{ author.name }}
+                    </h3>
+                    {% if author.bio %}
+                        <p style="margin-top: 8px; font-size: 0.9em; color: #5a4636; white-space: pre-line;">
+                            {{ author.bio }}
+                        </p>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p style="margin-top: 20px; font-size: 1.1em; color: #2c1b10;">
+            No authors registered yet.
+        </p>
+    {% endif %}
+</div>
+{% endblock %}

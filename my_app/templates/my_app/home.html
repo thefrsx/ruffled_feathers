@@ -1,0 +1,18 @@
+{% extends 'my_app/base.html' %}
+{% load static %}
+
+{% block content %}
+<div style="text-align: center; margin-top: 40px;">
+    <img src="{% static 'images/medieval_home_mockup.png' %}" alt="Welcome Image" style="max-width: 90%; border: 2px solid #5a4636; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);">
+    
+    <div style="margin-top: 30px;">
+        {% if is_author %}
+            <a href="{% url 'edition_create' %}" class="button-medieval">
+                Write a New Edition (Only Authors)
+            </a>
+        {% endif %}
+        <a href="{% url 'edition_list' %}" class="button-medieval" style="margin-left: 15px;">See Published Editions</a>
+        <a href="{% url 'author_list' %}" class="button-medieval" style="margin-left: 15px;">Know the Authors</a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends 'my_app/base.html' %}
+{% load static %}
+
+{% block content %}
+<div style="text-align: center; margin-top: 40px;">
+    <h1>All Editions</h1>
+
+    {% if editions %}
+        <ul style="list-style-type: none; padding: 0; margin-top: 20px;">
+            {% for edition in editions %}
+                <li style="margin: 15px auto; padding: 15px; width: 60%; 
+                           border: 2px solid #5a4636; border-radius: 8px; 
+                           background-color: rgba(217,199,163,0.85); 
+                           box-shadow: 0 4px 6px rgba(0,0,0,0.5);">
+                    <h2 style="margin: 0; font-family: 'Cinzel Decorative', serif;">
+                        <a href="{% url 'edition_detail' edition.pk %}" 
+                           style="color: #2c1b10; text-decoration: none;">
+                            {{ edition.title }} (No. {{ edition.number }})
+                        </a>
+                    </h2>
+                    <p style="margin: 10px 0; font-style: italic; color: #3b2f2f;">
+                        Published on {{ edition.date|date:"F j, Y" }}
+                    </p>
+                    {% if is_author %}
+                        <a href="{% url 'edition_edit' edition.pk %}" class="button-medieval">Edit</a>
+                        <a href="{% url 'edition_delete' edition.pk %}" class="button-medieval">Delete</a>
+                    {% endif %}
+                    {% if is_author %}
+                        <a href="{% url 'edition_create' %}" class="button-medieval">➕ Create New Edition</a>
+                    {% endif %}
+                </li>
+                {% empty %}
+                <li>No Editions yet.</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p style="margin-top: 20px; font-size: 1.2em; color: #f5f0e6;">
+            No editions available.
+        </p>
+    {% endif %}
+    {% if is_author %}
+    <div style="margin-top: 30px;">
+        <a href="{% url 'edition_create' %}" class="button-medieval">➕ Create New Edition</a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "my_app/base.html" %}
+{% load static %}
+
+{% block title %}Create Story - Ruffles Feathers Newspaper{% endblock %}
+
+{% block content %}
+<div class="story-form-container">
+    <h2>
+        <span class="icon">📜</span> Write a New Story
+    </h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-field">
+            <label for="id_title">Title:</label>
+            {{ form.title }}
+        </div>
+        <div class="form-field">
+            <label for="id_description">Content:</label>
+            {{ form.description }}
+        </div>
+        <div class="form-field">
+            <label for="id_author">Author:</label>
+            {{ form.author }}
+        </div>
+        <button type="submit">Publish Story</button>
+    </form>
+    <a href="{% url 'edition_detail' edition.pk %}" class="back-link">⬅ Back to Edition</a>
+</div>
+{% endblock %}

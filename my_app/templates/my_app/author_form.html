@@ -1,0 +1,26 @@
+{% extends "my_app/base.html" %}
+
+{% block title %}Add Author - Ruffles Feathers Newspaper{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <h2 class="form-title"> Add a New Author</h2>
+    <form method="post" enctype="multipart/form-data" class="styled-form">
+        {% csrf_token %}
+        <div class="form-field">
+            {{ form.name.label_tag }}
+            {{ form.name }}
+        </div>
+        <div class="form-field">
+            {{ form.bio.label_tag }}
+            {{ form.bio }}
+        </div>
+        <div class="form-field">
+            {{ form.profile_picture.label_tag }}
+            {{ form.profile_picture }}
+        </div>
+        <button type="submit" class="form-button">Save Author</button>
+    </form>
+    <a href="{% url 'author_list' %}" class="back-link">⬅ Back to Authors</a>
+</div>
+{% endblock %}

@@ -1,0 +1,43 @@
+<!-- revista/templates/revista/edition_list.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Homepage - Editions</title>
+</head>
+<body>
+    <h1>All Editions</h1>
+
+    <!-- Create Edition button (only for logged-in users) -->
+    {% if user.is_authenticated %}
+        <p><a href="{% url 'edition_create' %}">Create New Edition</a></p>
+    {% else %}
+        <p><a href="{% url 'login' %}">Login to create editions</a></p>
+    {% endif %}
+
+    <!-- List all editions -->
+    <ul>
+        {% for edition in editions %}
+            <li>
+                <strong>{{ edition.title }}</strong> (No. {{ edition.number }}) - {{ edition.date }}
+                <br>
+                <a href="{% url 'edition_detail' edition.pk %}">Read Edition</a>
+
+                {% if user.is_authenticated %}
+                    | <a href="{% url 'edition_edit' edition.pk %}">Edit</a>
+                    | <a href="{% url 'edition_delete' edition.pk %}">Delete</a>
+                {% endif %}
+            </li>
+        {% empty %}
+            <li>No editions available.</li>
+        {% endfor %}
+        {% if user.is_authenticated %}
+            <p>
+                Logged in as {{ user.username }} |
+                <a href="{% url 'logout' %}">Logout</a>
+            </p>
+        {% else %}
+            <p><a href="{% url 'login' %}">Login</a></p>
+        {% endif %}
+    </ul>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!-- revista/templates/revista/login.html -->
+{% extends "my_app/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="login-container">
+    <h2>
+        <span class="icon"></span> Login
+    </h2>
+    <form method="post">
+        {% csrf_token %}
+        <label for="username">Username:</label>
+        <input type="text" name="username" id="username">
+
+        <label for="password">Password:</label>
+        <input type="password" name="password" id="password">
+
+        <button type="submit">Login</button>
+    </form>
+    <a href="{% url 'home' %}">Back to Homepage</a>
+</div>
+{% endblock %}
