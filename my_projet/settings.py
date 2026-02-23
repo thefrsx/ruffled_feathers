@@ -119,12 +119,15 @@ USE_TZ = True
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 STATICFILES_DIRS = [
-    BASE_DIR / "my_app" / "static"
+    os.path.join(BASE_DIR, "my_app", "static")
 ]
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/'
@@ -132,6 +135,3 @@ LOGOUT_REDIRECT_URL = '/'
 
 # Session expires after 2 hours (in seconds)
 SESSION_COOKIE_AGE = 2 * 60 * 60   # 7200 seconds
-
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.joim(BASE_DIR, 'media')
